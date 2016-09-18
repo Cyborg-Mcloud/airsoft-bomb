@@ -445,7 +445,7 @@ function ter_up()
 
 function cs_down()
 	{
-	if (but2==0)
+	if (but2==0 && curevent>2 && curevent<7)
 		{
 		but2=1;
 		keycounter=0;
@@ -462,7 +462,7 @@ function cs_up()
 		{
 		but2=0;
 		keycounter=0;
-				console.log("defusing aborted");
+		console.log("defusing aborted");
 		if (curevent==8)
 			{
 			curevent=de_break;
@@ -471,7 +471,7 @@ function cs_up()
 		}	
 	}
 
-
+	setTimeout("MainProg();",500);
     </script>
   </head>
   <style>
