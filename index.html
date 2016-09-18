@@ -162,6 +162,8 @@ function MainProg()
 	if (curevent==0)
 		{
 		document.getElementById('mytimer').innerHTML="00:00:00";
+		document.getElementById('bluebutton').style.visibility="hidden";
+		document.getElementById('redbutton').style.visibility="visible";
 		}
 	else if (curevent==1)
 		{
@@ -178,6 +180,8 @@ function MainProg()
 				a_beeps1.play();
 				keycounter=0;
 				console.log("bomb has been planted");
+				document.getElementById('bluebutton').style.visibility="visible";
+				document.getElementById('redbutton').style.visibility="hidden";
 				}
 
 			}
@@ -502,9 +506,9 @@ function cs_up()
 <div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
 		
 
-<a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:175px; top:410px; width:50px; height:50px; border:1px solid red; background-color:red;'></a>
+<a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:175px; top:410px; width:50px; height:50px; border:1px solid red; background-color:red;'></a>
 	
-<a href='#' ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:320px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'></a>
+<a href='#' id="bluebutton" ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:320px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'></a>
 
 		
 		<!-- MAIN MAP -->
