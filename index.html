@@ -244,8 +244,13 @@ function MainProg()
 		console.log("tick when booming: "+tick_timer);
 		if (tick_timer>33)
 			{
-			curevent=0;
+			curevent=11;
 			console.log("Terrorist win: ");
+			url="http://airsoft.ge/bombapp/bomb.php?curevent="+11;
+			console.log("bombupdate: "+url);
+			gamehttp.open('GET',url,true);
+			gamehttp.send(null);
+
 			a_t_win.play();
 			// terrorists win
 			}
@@ -312,6 +317,10 @@ function MainProg()
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
 
+	if (curevent==11)
+		{
+		curevent=0;
+		}
 
 	setTimeout("MainProg();",500);
 	}
