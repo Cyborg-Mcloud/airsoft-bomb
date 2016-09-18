@@ -297,15 +297,22 @@ function MainProg()
 	else if (curevent==9)
 		{
 		tick_timer++;
-				console.log("after defused: "+tick_timer);
+		console.log("after defused: "+tick_timer);
 		if (tick_timer>3)
 			{
 			curevent=0;
 			a_ct_win.play();
-						console.log("Counter-Terrorist Win");
+			console.log("Counter-Terrorist Win");
 			// counter-terrorist win
 			}
 		}
+
+	url="http://airsoft.ge/bombapp/bomb.php?curevent="+curevent;
+	console.log("bombupdate: "+url);
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+
+
 	setTimeout("MainProg();",500);
 	}
 
@@ -319,11 +326,6 @@ function update_data()
 			{
 			console.log("data received from server: "+mr);
 
-			url="http://design.ge/geotaxi/chat.php?req=1&myid="+myid;
-		
-			console.log("request chat: "+url);
-			gamehttp.open('GET',url,true);
-			gamehttp.send(null);
 			}
 		}
 	}
