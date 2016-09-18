@@ -176,7 +176,7 @@ function MainProg()
 				curevent=3;
 				tick_timer=0;
 				a_beeps1.play();
-				keytimer=0;
+				keycounter=0;
 				console.log("bomb has been planted");
 				}
 
@@ -244,9 +244,9 @@ function MainProg()
 		}
 	else if (curevent==8)
 		{
-		keytimer++;
+		keycounter++;
 		tick_timer++;
-		console.log("defusing: "+keytimer+" ticker: "+tick_timer);
+		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
 
 		if (tick_timer>9)
@@ -272,7 +272,7 @@ function MainProg()
 			console.log("ne uspel, boom: "+tick_timer);
 			}
 
-		if (keytimer>5)
+		if (keycounter>8)
 			{
 			console.log("defused");
 			curevent=9;
