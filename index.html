@@ -16,6 +16,50 @@
 
 <script type="text/javascript" charset="utf-8">
 
+var curevent=0;
+
+var a_plant_start = new Audio('sound_keys.mp3');
+var a_planted = new Audio('sound_planted.mp3');
+
+var a_beeps1 = new Audio('sound_beeps_1.mp3');
+var a_beeps2 = new Audio('sound_beeps_2.mp3');
+var a_beeps3 = new Audio('sound_beeps_3.mp3');
+var a_beeps4 = new Audio('sound_beeps_4.mp3');
+
+a_beeps1.addEventListener('ended', function() {
+	if (curevent==3)
+		{
+		this.currentTime = 0;
+		this.play();
+		}	  
+	}, false);
+
+a_beeps2.addEventListener('ended', function() {
+	if (curevent==4)
+		{
+		this.currentTime = 0;
+		this.play();
+		}	  
+	}, false);
+
+a_beeps3.addEventListener('ended', function() {
+	if (curevent==5)
+		{
+		this.currentTime = 0;
+		this.play();
+		}	  
+	}, false);
+
+var a_boom = new Audio('sound_boom.mp3');
+var a_t_win = new Audio('sound_t_win.mp3');
+
+var a_ct_win = new Audio('sound_ct_win.mp3');
+
+var a_defuse_start = new Audio('sound_defuse_start.mp3');
+var a_defused = new Audio('sound_defused.mp3');
+
+
+
 var mystatus=0;
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -103,14 +147,113 @@ function onDeviceReady()
 	//setmypos();
 	}
 // ------------------------
-
+var tick_timer=0;
 function MainProg()
 	{
 	console.log("main prog: "+started);
+	if (curevent==1)
+		{
+		if (but1==1)
+			{
+			keycounter++;
+			console.log("key1 down: "+keycounter);
+			if (keycounter>6)
+				{
+				curevent=2;
+				a_planted.play();
+				curevent=3;
+				tick_timer=0;
+				a_beeps1.play();
+				keytimer=0;
+				console.log("bomb has been planted");
+				}
 
-	setTimeout("MainProg();",1000);
+			}
+		}
+	else if (curevent==3)
+		{
+		tick_timer++;
+		console.log("tick1: "+tick_timer);
+		if (tick_timer>10)
+			{
+			curevent=4;
+			a_beeps2.play();
+			}
+		}
+	else if (curevent==4)
+		{
+		tick_timer++;
+		console.log("tick2: "+tick_timer);
+		if (tick_timer>20)
+			{
+			curevent=5;
+			a_beeps3.play();
+			}
+		}
+	else if (curevent==5)
+		{
+		tick_timer++;
+		console.log("tick3: "+tick_timer);
+		if (tick_timer>27)
+			{
+			curevent=6;
+			a_beeps4.play();
+			// super fast beeps
+			}
+		}
+
+	else if (curevent==6)
+		{
+		tick_timer++;
+		console.log("tick4: "+tick_timer);
+		if (tick_timer>30)
+			{
+			curevent=7;
+			a_boom.play();
+			// boom
+			console.log("boom: "+tick_timer);
+			}
+		}
+	else if (curevent==7)
+		{
+		tick_timer++;
+				console.log("tick when booming: "+tick_timer);
+		if (tick_timer>33)
+			{
+			curevent=0;
+			console.log("Terrorist win: ");
+			a_t_win.play();
+			// terrorists win
+			}
+		}
+	else if (curevent==8)
+		{
+		keytimer++;
+			console.log("defusing: "+keytimer);
+		if (keytimer>5)
+			{
+			console.log("defused");
+			curevent=9;
+			tick_timer=0;
+			a_defused.play();
+			de_break=0;
+			// defused
+			}
+		}
+	else if (curevent==9)
+		{
+		tick_timer++;
+				console.log("after defused: "+tick_timer);
+		if (tick_timer>3)
+			{
+			curevent=0;
+			a_ct_win.play();
+						console.log("Counter-Terrorist Win");
+			// counter-terrorist win
+			}
+		}
+	setTimeout("MainProg();",500);
 	}
-
 
 
 function update_data()
@@ -235,6 +378,68 @@ console.log(" x: "+(-(mywpx-(sx))/2)+ " Y: "+(-(myhpx-(sy))/2));
     console.log(error.code);
     }
  
+
+
+var keycounter=0;
+var but1=0;
+var but2=0;
+var de_break=0;
+function ter_down()
+	{
+	if (but1==0)
+		{
+		but1=1;
+		keycounter=0;
+		curevent=1;
+		a_plant_start.play();
+		console.log("planting");
+		}
+	}
+
+function ter_up()
+	{
+	if (but1==1)
+		{
+		but1=0;
+		keycounter=0;
+		if (curevent==1)
+			{
+			curevent=0;
+					console.log("planting: aborted ");
+			}
+		}	
+	}
+
+
+function ct_down()
+	{
+	if (but2==0)
+		{
+		but2=1;
+		keycounter=0;
+		de_break=curevent;
+		curevent=8;
+		a_defuse_start.play();
+				console.log("defusing, on level: "+de_break);
+		}
+	}
+
+function ct_up()
+	{
+	if (but2==1)
+		{
+		but2=0;
+		keycounter=0;
+				console.log("defusing aborted");
+		if (curevent==8)
+			{
+			curevent=de_break;
+					console.log("return to tick: "+de_break);
+			}
+		}	
+	}
+
+
     </script>
   </head>
   <style>
@@ -249,9 +454,9 @@ console.log(" x: "+(-(mywpx-(sx))/2)+ " Y: "+(-(myhpx-(sy))/2));
 <div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;'>00:00:00</div>
 		
 
-<a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:200px; top:400px; width:50x; height:50px; border:1px solid red; background-color:red;'>a</a>
+<a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:185px; top:400px; width:50px; height:50px; border:1px solid red; background-color:red;'>a</a>
 	
-<a href='#' ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:340px; top:600px; width:50x; height:50px; border:1px solid blue; background-color:blue;'>b</a>
+<a href='#' ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:330px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'>b</a>
 
 		
 		<!-- MAIN MAP -->
