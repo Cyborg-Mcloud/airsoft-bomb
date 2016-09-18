@@ -251,7 +251,7 @@ function MainProg()
 		keycounter++;
 		tick_timer++;
 		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
 
 		if (tick_timer>19)
 			{
