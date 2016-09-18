@@ -187,6 +187,7 @@ function MainProg()
 		tick_timer++;
 		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
+					de_break=0;
 		if (tick_timer>19)
 			{
 			curevent=4;
@@ -195,6 +196,7 @@ function MainProg()
 		}
 	else if (curevent==4)
 		{
+						de_break=0;
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
@@ -206,6 +208,7 @@ function MainProg()
 		}
 	else if (curevent==5)
 		{
+						de_break=0;
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
@@ -219,6 +222,7 @@ function MainProg()
 
 	else if (curevent==6)
 		{
+						de_break=0;
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
@@ -249,25 +253,26 @@ function MainProg()
 		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
 
-		if (tick_timer>9)
+		if (tick_timer>19)
 			{
 			de_break=4;
 			a_beeps2.play();
 			}
-		else if (tick_timer>19)
+		else if (tick_timer>39)
 			{
 			de_break=5;
 			a_beeps3.play();
 			}
-		else if (tick_timer>26)
+		else if (tick_timer>56)
 			{
 			de_break=6;
 			a_beeps4.play();
 			}
-		else if (tick_timer>29)
+		else if (tick_timer>59)
 			{
 			curevent=7;
 			a_boom.play();
+			de_break=0;
 			// boom
 			console.log("ne uspel, boom: "+tick_timer);
 			}
