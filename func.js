@@ -54,7 +54,7 @@ function checkConnection()
 	inter= states[networkState];
 
 	curint=inter;
-	document.getElementById('erorebi').innerHTML="internet: "+inter;
+//	document.getElementById('erorebi').innerHTML="internet: "+inter;
 	}
 
 

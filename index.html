@@ -27,7 +27,7 @@ var a_beeps3 = new Audio('sound_beeps_3.mp3');
 var a_beeps4 = new Audio('sound_beeps_4.mp3');
 
 a_beeps1.addEventListener('ended', function() {
-	if (curevent==3)
+	if (curevent==3 || de_break==3)
 		{
 		this.currentTime = 0;
 		this.play();
@@ -35,7 +35,7 @@ a_beeps1.addEventListener('ended', function() {
 	}, false);
 
 a_beeps2.addEventListener('ended', function() {
-	if (curevent==4)
+	if (curevent==4 || de_break==4)
 		{
 		this.currentTime = 0;
 		this.play();
@@ -43,7 +43,7 @@ a_beeps2.addEventListener('ended', function() {
 	}, false);
 
 a_beeps3.addEventListener('ended', function() {
-	if (curevent==5)
+	if (curevent==5 || de_break==5)
 		{
 		this.currentTime = 0;
 		this.play();
@@ -151,7 +151,11 @@ var tick_timer=0;
 function MainProg()
 	{
 	console.log("main prog: "+started);
-	if (curevent==1)
+	if (curevent==0)
+		{
+		document.getElementById('mytimer').innerHTML="00:00:00";
+		}
+	else if (curevent==1)
 		{
 		if (but1==1)
 			{
@@ -173,6 +177,7 @@ function MainProg()
 	else if (curevent==3)
 		{
 		tick_timer++;
+		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
 		if (tick_timer>10)
 			{
@@ -184,6 +189,7 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
+		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 		if (tick_timer>20)
 			{
 			curevent=5;
@@ -194,6 +200,7 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
+		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 		if (tick_timer>27)
 			{
 			curevent=6;
@@ -206,6 +213,7 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
+		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 		if (tick_timer>30)
 			{
 			curevent=7;
@@ -217,7 +225,7 @@ function MainProg()
 	else if (curevent==7)
 		{
 		tick_timer++;
-				console.log("tick when booming: "+tick_timer);
+		console.log("tick when booming: "+tick_timer);
 		if (tick_timer>33)
 			{
 			curevent=0;
@@ -229,7 +237,33 @@ function MainProg()
 	else if (curevent==8)
 		{
 		keytimer++;
-			console.log("defusing: "+keytimer);
+		tick_timer++;
+		console.log("defusing: "+keytimer+" ticker: "+tick_timer);
+		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
+
+		if (tick_timer>10)
+			{
+			de_break=4;
+			a_beeps2.play();
+			}
+		else if (tick_timer>20)
+			{
+			de_break=5;
+			a_beeps3.play();
+			}
+		else if (tick_timer>27)
+			{
+			de_break=6;
+			a_beeps4.play();
+			}
+		else if (tick_timer>30)
+			{
+			curevent=7;
+			a_boom.play();
+			// boom
+			console.log("ne uspel, boom: "+tick_timer);
+			}
+
 		if (keytimer>5)
 			{
 			console.log("defused");
@@ -357,8 +391,6 @@ if (myh/2==Math.floor(myh/2))
 
 
 
-document.getElementById("fanjara").style.width=sx+"px";
-document.getElementById("fanjara").style.height=sy+"px";
 
 
 var mywpx=(myw-1)*256;
@@ -451,7 +483,7 @@ function ct_up()
 
 <img src="bomb.png" width=100%>
 
-<div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;'>00:00:00</div>
+<div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
 		
 
 <a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:185px; top:400px; width:50px; height:50px; border:1px solid red; background-color:red;'>a</a>
