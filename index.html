@@ -241,22 +241,22 @@ function MainProg()
 		console.log("defusing: "+keytimer+" ticker: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 
-		if (tick_timer>10)
+		if (tick_timer>9)
 			{
 			de_break=4;
 			a_beeps2.play();
 			}
-		else if (tick_timer>20)
+		else if (tick_timer>19)
 			{
 			de_break=5;
 			a_beeps3.play();
 			}
-		else if (tick_timer>27)
+		else if (tick_timer>26)
 			{
 			de_break=6;
 			a_beeps4.play();
 			}
-		else if (tick_timer>30)
+		else if (tick_timer>29)
 			{
 			curevent=7;
 			a_boom.play();
@@ -486,9 +486,9 @@ function cs_up()
 <div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
 		
 
-<a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:175px; top:410px; width:50px; height:50px; border:1px solid red; background-color:red;'>a</a>
+<a href='#' ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:175px; top:410px; width:50px; height:50px; border:1px solid red; background-color:red;'></a>
 	
-<a href='#' ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:320px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'>b</a>
+<a href='#' ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:320px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'></a>
 
 		
 		<!-- MAIN MAP -->
