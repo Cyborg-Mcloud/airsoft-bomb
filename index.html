@@ -150,6 +150,12 @@ function onDeviceReady()
 var tick_timer=0;
 
 var mids=0;
+
+function pad(num, size) {
+    var s = "000000000" + num;
+    return s.substr(s.length-size);
+}
+
 function MainProg()
 	{
 	console.log("main prog: "+started);
@@ -181,7 +187,7 @@ function MainProg()
 		tick_timer++;
 		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
-		if (tick_timer>10)
+		if (tick_timer>19)
 			{
 			curevent=4;
 			a_beeps2.play();
@@ -191,8 +197,8 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
-		if (tick_timer>20)
+		document.getElementById('mytimer').innerHTML="00:"+pad((30-tick_timer),2)+":00";
+		if (tick_timer>39)
 			{
 			curevent=5;
 			a_beeps3.play();
@@ -202,8 +208,8 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
-		if (tick_timer>27)
+		document.getElementById('mytimer').innerHTML="00:"+pad((30-tick_timer),2)+":00";
+		if (tick_timer>56)
 			{
 			curevent=6;
 			a_beeps4.play();
@@ -215,8 +221,8 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
-		if (tick_timer>29)
+		document.getElementById('mytimer').innerHTML="00:"+pad((30-tick_timer),2)+":00";
+		if (tick_timer>59)
 			{
 			curevent=7;
 			a_boom.play();
