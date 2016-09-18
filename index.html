@@ -148,6 +148,8 @@ function onDeviceReady()
 	}
 // ------------------------
 var tick_timer=0;
+
+var mids=0;
 function MainProg()
 	{
 	console.log("main prog: "+started);
@@ -214,7 +216,7 @@ function MainProg()
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+(30-tick_timer)+":00";
-		if (tick_timer>30)
+		if (tick_timer>29)
 			{
 			curevent=7;
 			a_boom.play();
