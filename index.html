@@ -166,11 +166,13 @@ function MainProg()
 		document.getElementById('mytimer').innerHTML="00:00:00";
 		document.getElementById('bluebutton').style.visibility="hidden";
 		document.getElementById('redbutton').style.visibility="visible";
+		document.getElementById('probar_frame').style.visibility="hidden";
 		}
 	else if (curevent==1)
 		{
 		if (but1==1)
 			{
+			// PLANTING BOMB
 			keycounter++;
 			console.log("key1 down: "+keycounter);
 			if (keycounter>6)
@@ -184,14 +186,18 @@ function MainProg()
 				console.log("bomb has been planted");
 				document.getElementById('bluebutton').style.visibility="visible";
 				document.getElementById('redbutton').style.visibility="hidden";
+				document.getElementById('probar_frame').style.visibility="hidden";
 				}
-
+			document.getElementById('probar_frame').style.visibility="visible";
+			document.getElementById('probar').style.width=(keycounter*50)+"px";
+			document.getElementById('probar').style.backgroundColor="red";
 			}
 		}
 	else if (curevent==3)
 		{
+
 		tick_timer++;
-		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+(bombtime-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
 		de_break=0;
 		if (tick_timer>(bombtime/3))
@@ -205,7 +211,7 @@ function MainProg()
 		de_break=0;
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
 		if (tick_timer>((bombtime/3)*2))
 			{
 			curevent=5;
@@ -217,7 +223,7 @@ function MainProg()
 		de_break=0;
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
 		if (tick_timer>(bombtime-6))
 			{
 			curevent=6;
@@ -231,7 +237,7 @@ function MainProg()
 		de_break=0;
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
 		if (tick_timer>(bombtime-1))
 			{
 			curevent=7;
@@ -259,10 +265,16 @@ function MainProg()
 		}
 	else if (curevent==8)
 		{
+		// DEFUSING
 		keycounter++;
 		tick_timer++;
 		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
-		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
+		document.getElementById('mytimer').innerHTML="00:"+pad((bombtime-tick_timer),2)+":00";
+
+
+		document.getElementById('probar_frame').style.visibility="visible";
+		document.getElementById('probar').style.width=(keycounter*40)+"px";
+		document.getElementById('probar').style.backgroundColor="blue";
 
 		if (tick_timer>(bombtime-1)  && de_break==6)
 			{
@@ -291,6 +303,7 @@ function MainProg()
 		if (keycounter>8)
 			{
 			console.log("defused");
+			document.getElementById('probar_frame').style.visibility="hidden";
 			curevent=9;
 			tick_timer=0;
 			a_defused.play();
@@ -467,7 +480,8 @@ function ter_up()
 		if (curevent==1)
 			{
 			curevent=0;
-					console.log("planting: aborted ");
+			console.log("planting: aborted ");
+			document.getElementById('probar_frame').style.visibility="hidden";
 			}
 		}	
 	}
@@ -482,7 +496,7 @@ function cs_down()
 		de_break=curevent;
 		curevent=8;
 		a_defuse_start.play();
-				console.log("defusing, on level: "+de_break);
+		console.log("defusing, on level: "+de_break);
 		}
 	}
 
@@ -496,7 +510,8 @@ function cs_up()
 		if (curevent==8)
 			{
 			curevent=de_break;
-					console.log("return to tick: "+de_break);
+			console.log("return to tick: "+de_break);
+			document.getElementById('probar_frame').style.visibility="hidden";
 			}
 		}	
 	}
@@ -515,12 +530,12 @@ function cs_up()
 
 <div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
 
-<div id='probar_frame' style='position:absolute; left:50px; top:200px; width:300px; height:50px; border:1px solid red;'><div id='probar' style='position:absolute; left:0px; top:0px; width:50px; height:50px; background-color:red; '></div></div>
+<div id='probar_frame' style='position:absolute; left:130px; top:230px; width:300px; height:50px; border:1px solid red;'><div id='probar' style='position:absolute; left:0px; top:0px; width:50px; height:50px; background-color:red; '></div></div>
 		
 
-<a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:165px; top:400px; width:80px; height:80px; border:1px solid red; background-color:red;'></a>
+<a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:160px; top:390px; width:80px; height:80px; border:1px solid red; background-color:red;'></a>
 	
-<a href='#' id="bluebutton" ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:310px; top:600px; width:80px; height:80px; border:1px solid blue; background-color:blue;'></a>
+<a href='#' id="bluebutton" ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:305px; top:600px; width:80px; height:80px; border:1px solid blue; background-color:blue;'></a>
 
 		
 		<!-- MAIN MAP -->
