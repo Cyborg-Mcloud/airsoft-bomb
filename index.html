@@ -195,7 +195,7 @@ function MainProg()
 		}
 	else if (curevent==3)
 		{
-
+		document.getElementById('probar_frame').style.visibility="hidden";
 		tick_timer++;
 		document.getElementById('mytimer').innerHTML="00:"+(bombtime-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
@@ -208,6 +208,7 @@ function MainProg()
 		}
 	else if (curevent==4)
 		{
+					document.getElementById('probar_frame').style.visibility="hidden";
 		de_break=0;
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
@@ -220,6 +221,7 @@ function MainProg()
 		}
 	else if (curevent==5)
 		{
+					document.getElementById('probar_frame').style.visibility="hidden";
 		de_break=0;
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
@@ -234,6 +236,7 @@ function MainProg()
 
 	else if (curevent==6)
 		{
+					document.getElementById('probar_frame').style.visibility="hidden";
 		de_break=0;
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
@@ -528,9 +531,9 @@ function cs_up()
 
 <img src="bomb.png" width=100%>
 
-<div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
+<div style='font-family:terminal; font-size:52px; font-color:black; position:absolute; left:200px; top:95px;' id='mytimer'>00:00:00</div>
 
-<div id='probar_frame' style='position:absolute; left:130px; top:230px; width:300px; height:50px; border:1px solid red;'><div id='probar' style='position:absolute; left:0px; top:0px; width:50px; height:50px; background-color:red; '></div></div>
+<div id='probar_frame' style='position:absolute; left:130px; top:230px; width:300px; height:50px; border:2px solid black; overflow:hidden;'><div id='probar' style='position:absolute; left:0px; top:0px; width:50px; height:50px; background-color:red; '></div></div>
 		
 
 <a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:160px; top:390px; width:80px; height:80px; border:1px solid red; background-color:red;'></a>
