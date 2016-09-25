@@ -156,6 +156,8 @@ function pad(num, size) {
     return s.substr(s.length-size);
 }
 
+var bombtime=90;
+
 function MainProg()
 	{
 	console.log("main prog: "+started);
@@ -191,8 +193,8 @@ function MainProg()
 		tick_timer++;
 		document.getElementById('mytimer').innerHTML="00:"+(60-tick_timer)+":00";
 		console.log("tick1: "+tick_timer);
-					de_break=0;
-		if (tick_timer>19)
+		de_break=0;
+		if (tick_timer>(bombtime/3))
 			{
 			curevent=4;
 			a_beeps2.play();
@@ -200,11 +202,11 @@ function MainProg()
 		}
 	else if (curevent==4)
 		{
-						de_break=0;
+		de_break=0;
 		tick_timer++;
 		console.log("tick2: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
-		if (tick_timer>39)
+		if (tick_timer>((bombtime/3)*2))
 			{
 			curevent=5;
 			a_beeps3.play();
@@ -212,11 +214,11 @@ function MainProg()
 		}
 	else if (curevent==5)
 		{
-						de_break=0;
+		de_break=0;
 		tick_timer++;
 		console.log("tick3: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
-		if (tick_timer>56)
+		if (tick_timer>(bombtime-6))
 			{
 			curevent=6;
 			a_beeps4.play();
@@ -226,11 +228,11 @@ function MainProg()
 
 	else if (curevent==6)
 		{
-						de_break=0;
+		de_break=0;
 		tick_timer++;
 		console.log("tick4: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
-		if (tick_timer>59)
+		if (tick_timer>(bombtime-1))
 			{
 			curevent=7;
 			a_boom.play();
@@ -242,7 +244,7 @@ function MainProg()
 		{
 		tick_timer++;
 		console.log("tick when booming: "+tick_timer);
-		if (tick_timer>33)
+		if (tick_timer>(bombtime+3))
 			{
 			curevent=11;
 			console.log("Terrorist win: ");
@@ -262,7 +264,7 @@ function MainProg()
 		console.log("defusing: "+keycounter+" ticker: "+tick_timer);
 		document.getElementById('mytimer').innerHTML="00:"+pad((60-tick_timer),2)+":00";
 
-		if (tick_timer>59  && de_break==6)
+		if (tick_timer>(bombtime-1)  && de_break==6)
 			{
 			curevent=7;
 			a_boom.play();
@@ -270,25 +272,22 @@ function MainProg()
 			// boom
 			console.log("ne uspel, boom: "+tick_timer);
 			}
-		else if (tick_timer>56 && de_break==5)
+		else if (tick_timer>(bombtime-6) && de_break==5)
 			{
 			de_break=6;
 			a_beeps4.play();
 			}
-		else if (tick_timer>39 && de_break==4)
+		else if (tick_timer>((bombtime/3)*2) && de_break==4)
 			{
 			de_break=5;
 			a_beeps3.play();
 			}
-		else if (tick_timer>19 && de_break==3)
+		else if (tick_timer>(bombtime/3) && de_break==3)
 			{
 			de_break=4;
 			a_beeps2.play();
 			}
 		
-		
-		
-
 		if (keycounter>8)
 			{
 			console.log("defused");
@@ -515,11 +514,13 @@ function cs_up()
 <img src="bomb.png" width=100%>
 
 <div style='font-family:terminal; font-size:48px; font-color:black; position:absolute; left:220px; top:100px;' id='mytimer'>00:00:00</div>
+
+<div id='probar_frame' style='position:absolute; left:50px; top:200px; width:300px; height:50px; border:1px solid red;'><div id='probar' style='position:absolute; left:0px; top:0px; width:50px; height:50px; background-color:red; '></div></div>
 		
 
-<a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:175px; top:410px; width:50px; height:50px; border:1px solid red; background-color:red;'></a>
+<a href='#' id="redbutton" ontouchstart='ter_down()' ontouchend='ter_up()' style='display:block; position: absolute; left:165px; top:400px; width:80px; height:80px; border:1px solid red; background-color:red;'></a>
 	
-<a href='#' id="bluebutton" ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:320px; top:610px; width:50px; height:50px; border:1px solid blue; background-color:blue;'></a>
+<a href='#' id="bluebutton" ontouchstart='cs_down()' ontouchend='cs_up()' style='display:block; position: absolute; left:310px; top:600px; width:80px; height:80px; border:1px solid blue; background-color:blue;'></a>
 
 		
 		<!-- MAIN MAP -->
